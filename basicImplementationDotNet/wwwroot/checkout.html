@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        #checkout-container {
+            display: flex;
+            flex-direction: col mt-2umn;
+            padding: 12px 24px;
+        }
+    </style>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<noscript>
+    <div style="text-align:center; margin: 20px; padding: 20px; background-color: #f44336; color: white;">
+        Please enable JavaScript to continue using this application.
+    </div>
+</noscript>
+<div id="main-wrapper" class="container-sm">
+    <div id="error-box"></div>
+    <div id="checkout-container" class="shadow mt-2"></div>
+</div>
+<!-- Include your script to initialize the SDK and send data to Primer -->
+<!-- Begin Primer Scripts -->
+<link rel="stylesheet" href="https://sdk.primer.io/web/v2.20.0/Checkout.css" />
+<script src="https://sdk.primer.io/web/v2.20.0/Primer.min.js" crossorigin="anonymous"></script>
+<!-- End Primer scripts-->
+<script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+<script src="/static/client.js"></script>
+</body>
+</html>

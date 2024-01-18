@@ -1,0 +1,30 @@
+﻿#checkout-container {
+    display: none;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 32px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+#error-box {
+    visibility: hidden;
+}
+
+#error-box.active {
+    width: 500px;
+    visibility: visible;
+    height: auto;
+    margin: 30px auto;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid red;
+    background: #fce2e2;
+    color: red;
+    font-weight: 400;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 4px 5px 5px 1px #fce2e2;
+}

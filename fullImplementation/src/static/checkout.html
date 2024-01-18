@@ -1,117 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Checkout</title>
-   <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <style>
       #checkout-container {
-         display: flex;
-         flex-direction: col mt-2umn;
-         padding: 12px 24px;
-         }
-      </style>
-      <link rel="stylesheet" href="/static/style.css" />
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-   </head>
-   <body>
-      <noscript>
-         <div style="text-align:center; margin: 20px; padding: 20px; background-color: #f44336; color: white;">
-           Please enable JavaScript to continue using this application.
-         </div>
-       </noscript>
-      <div id="main-wrapper" class="container-sm">
-         <div id="error-box"></div>
-         <div id="mov-header" class="text-center mb-4 mt-4">
-            <div class="headerWLogo row">
-               <div class="col-2"><img width='150' class="mt-1" src="https://movdpwebsiteprodae.blob.core.windows.net/images/Monoova.png"/></div>
-               <div class="col-8">
-                  <h1 class="d-none d-md-block">Monoova Payments</h1>
-            </div>
-         </div>
-         <h4 class="d-none d-md-block">Please fill the details below to submit your payment</h4>
-         </div>
-         <div id="mov-form-wrapper" class="shadow">
-            <form id="mov-payment-form" class="container" onsubmit="return false">
-               <div class="row g-2">
-                  <div class="mb-3 col-6">
-                     <label for="amount" class="form-label mb-0">Amount</label>
-                     <input type="text" class="form-control" id="amount" required pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency" name="amount" placeholder="$1,000.00" required>
-               </div>
-               <div class=" mb-3 col-6">
-                  <label for="cardType" class="form-label mb-0">Card Type</label>
-                  <select name="cardType" class="form-control" id="cardType" required>
-                     <option value="">Select Your Card Type</option>
-                     <option value="Visa">Visa</option>
-                     <option value="Mastercard">Mastercard</option>
-                     <!-- <option value="Amex">American Express</option>  //Will Be supported in Future implementation -->
-                  </select>
-               </div>
-               <div class="mb-3 col-6">
-                  <label for="email" class="form-label">Email Address</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
-                </div>
-                <div class="mt-4 col-12">
-                  <h5>Billing Address</h5>
-                </div>
-                <div class="mb-3 col-6">
-                  <label for="billingFirstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="billingFirstName" name="billingFirstName" placeholder="John" required>
-                </div>
-                <div class="mb-3 col-6">
-                  <label for="billingLastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="billingLastName" name="billingLastName" placeholder="Smith" required>
-                </div>
-                <div class="mb-3 col-6">
-                  <label for="billingStreet" class="form-label">Street</label>
-                  <input type="text" class="form-control" id="billingStreet" name="billingStreet" placeholder="123 Main St" required>
-                </div>
-                <div class="mb-3 col-6">
-                  <label for="billingSuburb" class="form-label">Suburb</label>
-                  <input type="text" class="form-control" id="billingSuburb" name="billingSuburb" placeholder="Sydney" required>
-                </div>
-                <div class="mb-3 col-6 dropdowns">
-                  <label for="billingCountry" class="form-label">Country</label>
-                  <select class="form-control"  id="billingCountry" name="billingCountry" required></select>
-                </div>
-                <div class="mb-3 col-6 dropdowns">
-                  <label for="billingState" class="form-label">State</label>
-                  <select class="form-control" id="billingState" name="billingState" required></select>
-                </div>
-                <div class="mb-3 col-6">
-                  <label for="billingPostCode" class="form-label">Postal Code</label>
-                  <input type="text" class="form-control" id="billingPostCode" name="billingPostCode" placeholder="2000" required>
-                </div>                
-            </div>
-               <button type="submit" class="btn btn-primary mx-auto d-block " onclick="submitPayment(this)">Make a Payment</button>
-            </form>
-         </div>
-         <div id="loader"  class="shadow justify-content-center align-items-center">
-            <div class="d-flex justify-content-center" id="loading" >
-               <div class="spinner-border text-primary" role="status">
-                     <span class="visually-hidden" >Loading...</span>
-               </div>
-            </div>
-         </div>
-         <div id="checkout-container" class="shadow mt-2"></div>
+        display: flex;
+        flex-direction: col mt-2umn;
+        padding: 12px 24px;
+      }
+    </style>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://sdk.primer.io" crossorigin />
+    <!-- begin debug code-->
+    <!-- <script>
+      function populateFormForDebugging() {
+         const fieldValues = {
+            amount: '$1.00',
+            email: 'test@gmail.com',
+            billingFirstName: 'billingFirstName',
+            billingLastName: 'billingLastName',
+            billingStreet: '123 Main street',
+            billingSuburb: 'Sydney',
+            billingState: 'NSW',
+            billingCountry: 'AU',
+            billingPostCode: '2000',
+            cardType: 'Visa'
+         };
+
+         // Loop through the object and set the values
+         Object.keys(fieldValues).forEach(fieldName => {
+            const input = document.querySelector(`#mov-payment-form [name="${fieldName}"]`);
+            if (input) {
+               if (input.type === 'text' || input.type === 'email' || input.tagName === 'SELECT') {
+                  input.value = fieldValues[fieldName];
+               }
+            }
+         });
+      }
+
+      // Ensure the DOM is fully loaded before running the function
+      document.addEventListener('DOMContentLoaded', populateFormForDebugging);
+
+   </script> -->
+    <!-- end debug code-->
+  </head>
+  <body>
+    <noscript>
+      <div
+        style="
+          text-align: center;
+          margin: 20px;
+          padding: 20px;
+          background-color: #f44336;
+          color: white;
+        "
+      >
+        Please enable JavaScript to continue using this application.
       </div>
-      <div id="mov-footer" class="container-sm text-center d-flex justify-content-center align-items-center mb-0 mt-4"> &copy; Monoova Payments Pty Limited (ACN 126 015 227 / Authorised Representative No. 000428863)</div>
+    </noscript>
+    <div id="main-wrapper" class="container-sm">
+      <div id="error-box"></div>
+      <div id="mov-header" class="text-center mb-4 mt-4">
+        <div class="headerWLogo row">
+          <div class="col-2">
+            <img
+              width="150"
+              class="mt-1"
+              src="https://movdpwebsiteprodae.blob.core.windows.net/images/Monoova.png"
+            />
+          </div>
+          <div class="col-8">
+            <h1 class="d-none d-md-block">Monoova Payments</h1>
+            <a href="/logout" class="btn btn-info" role="button">Logout</a>
+          </div>
+        </div>
+        <h4 class="d-none d-md-block">
+          Please fill the details below to submit your payment
+        </h4>
+      </div>
+      <div id="mov-form-wrapper" class="shadow">
+        <form id="mov-payment-form" class="container" onsubmit="return false">
+          <div class="row g-2">
+            <div class="mb-3 col-6">
+              <label for="amount" class="form-label mb-0">Amount</label>
+              <input
+                type="text"
+                class="form-control"
+                id="amount"
+                required
+                pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                data-type="currency"
+                name="amount"
+                placeholder="$1,000.00"
+                required
+              />
+            </div>
+            <div class="mb-3 col-6">
+              <label for="cardType" class="form-label mb-0">Card Type</label>
+              <select
+                name="cardType"
+                class="form-control"
+                id="cardType"
+                required
+              >
+                <option value="">Select Your Card Type</option>
+                <option value="Visa">Visa</option>
+                <option value="Mastercard">Mastercard</option>
+                <!-- <option value="Amex">American Express</option>  //Will Be supported in Future implementation -->
+              </select>
+            </div>
+            <div class="mb-3 col-6">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="name@example.com"
+                required
+              />
+            </div>
+            <div class="mt-4 col-12">
+              <h5>Billing Address</h5>
+            </div>
+            <div class="mb-3 col-6">
+              <label for="billingFirstName" class="form-label"
+                >First Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="billingFirstName"
+                name="billingFirstName"
+                placeholder="John"
+                required
+              />
+            </div>
+            <div class="mb-3 col-6">
+              <label for="billingLastName" class="form-label">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="billingLastName"
+                name="billingLastName"
+                placeholder="Smith"
+                required
+              />
+            </div>
+            <div class="mb-3 col-6">
+              <label for="billingStreet" class="form-label">Street</label>
+              <input
+                type="text"
+                class="form-control"
+                id="billingStreet"
+                name="billingStreet"
+                placeholder="123 Main St"
+                required
+              />
+            </div>
+            <div class="mb-3 col-6">
+              <label for="billingSuburb" class="form-label">Suburb</label>
+              <input
+                type="text"
+                class="form-control"
+                id="billingSuburb"
+                name="billingSuburb"
+                placeholder="Sydney"
+                required
+              />
+            </div>
+            <div class="mb-3 col-6 dropdowns">
+              <label for="billingCountry" class="form-label">Country</label>
+              <select
+                class="form-control"
+                id="billingCountry"
+                name="billingCountry"
+                required
+              ></select>
+            </div>
+            <div class="mb-3 col-6 dropdowns">
+              <label for="billingState" class="form-label">State</label>
+              <select
+                class="form-control"
+                id="billingState"
+                name="billingState"
+                required
+              ></select>
+            </div>
+            <div class="mb-3 col-6">
+              <label for="billingPostCode" class="form-label"
+                >Postal Code</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="billingPostCode"
+                name="billingPostCode"
+                placeholder="2000"
+                required
+              />
+            </div>
+            <div class="mt-4 col-12">
+              <h5>Tokenisation</h5>
+            </div>
+            <!-- Hidden field for customerId -->
+            <!-- Normally, this would be a real id from a logged in user from your system -->
+            <input type="hidden" id="customerId" name="customerId" />
+            <div class="container mt-4">
+              <!-- Save on Success Section -->
+              <div class="row g-2 mb-3">
+                <div class="col-md-6 d-flex align-items-center">
+                  <input
+                    type="checkbox"
+                    class="form-check-input me-2"
+                    id="saveOnSuccess"
+                  />
+                  <label class="form-check-label" for="saveOnSuccess"
+                    >Save on Success</label
+                  >
+                </div>
+                <div class="col-md-6 d-none" id="paymentTokenContainer">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="clientPaymentTokenUniqueReference"
+                    name="clientPaymentTokenUniqueReference"
+                    placeholder="Your Chosen Token Reference. e.g. Bob's Mastercard"
+                  />
+                </div>
+                <div class="col-md-6 d-none" id="paymentTokenNote">
+                  <small class="form-text text-muted">
+                    * Note: Your customer Id is mocked using the email for demo
+                    purposes. In a live setting, a unique, system-generated
+                    customer ID would be used to save and load the sessions
+                    securely via an authenticated checkout.
+                  </small>
+                </div>
+              </div>
 
-   <!-- Include your script to initialize the SDK and send data to Primer -->
-   <!-- Begin Primer Scripts -->
-   <link rel="stylesheet" href="https://sdk.primer.io/web/v2.20.0/Checkout.css"/>
-   <script src="https://sdk.primer.io/web/v2.20.0/Primer.min.js" crossorigin="anonymous" ></script>
-   <!-- End Primer scripts-->
+              <!-- Continue a past demo Section -->
+              <div class="mb-3 col-6">
+                <div class="col-md-12">
+                  <label for="emailForDemo" class="form-label"
+                    >Or, continue using saved token:</label
+                  >
+                  <div class="input-group">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="emailForDemo"
+                      name="emailForDemo"
+                      placeholder="Enter Email"
+                      aria-label="Enter Email"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      id="continueButton"
+                    >
+                      Load
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <button
+            type="submit"
+            class="btn btn-primary mx-auto d-block"
+            onclick="submitPayment(this)"
+          >
+            Make a Payment
+          </button>
+        </form>
+      </div>
+      <div id="loader" class="shadow justify-content-center align-items-center">
+        <div class="d-flex justify-content-center" id="loading">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <div id="checkout-container" class="shadow mt-2"></div>
+    </div>
+    <div
+      id="mov-footer"
+      class="container-sm text-center d-flex justify-content-center align-items-center mb-0 mt-4"
+    >
+      &copy; Monoova Payments Pty Limited (ACN 126 015 227 / Authorised
+      Representative No. 000428863)
+    </div>
 
-   <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-   <!-- script for checkout.html -->
-   <script src="/static/client.js"></script>
-</body>
+    <!-- Include your script to initialize the SDK and send data to Primer -->
+    <!-- Begin Primer Scripts -->
+    <link
+      rel="stylesheet"
+      href="https://sdk.primer.io/web/v2.35.1/Checkout.css"
+    />
+    <script
+      src="https://sdk.primer.io/web/v2.35.1/Primer.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- End Primer scripts-->
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
+      integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- script for checkout.html -->
+    <script src="/static/client.js"></script>
+  </body>
 </html>
