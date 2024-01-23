@@ -80,7 +80,9 @@
           </div>
           <div class="col-8">
             <h1 class="d-none d-md-block">Monoova Payments</h1>
-            <a href="/logout" class="btn btn-info" role="button">Logout</a>
+            <div class="col-2">
+              <a href="/logout" class="btn btn-info" role="button">Logout</a>
+            </div>
           </div>
         </div>
         <h4 class="d-none d-md-block">
@@ -212,69 +214,45 @@
             <div class="mt-4 col-12">
               <h5>Tokenisation</h5>
             </div>
-            <!-- Hidden field for customerId -->
-            <!-- Normally, this would be a real id from a logged in user from your system -->
-            <input type="hidden" id="customerId" name="customerId" />
-            <div class="container mt-4">
-              <!-- Save on Success Section -->
-              <div class="row g-2 mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <input
-                    type="checkbox"
-                    class="form-check-input me-2"
-                    id="saveOnSuccess"
-                  />
-                  <label class="form-check-label" for="saveOnSuccess"
-                    >Save on Success</label
-                  >
-                </div>
-                <div class="col-md-6 d-none" id="paymentTokenContainer">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="clientPaymentTokenUniqueReference"
-                    name="clientPaymentTokenUniqueReference"
-                    placeholder="Your Chosen Token Reference. e.g. Bob's Mastercard"
-                  />
-                </div>
-                <div class="col-md-6 d-none" id="paymentTokenNote">
-                  <small class="form-text text-muted">
-                    * Note: Your customer Id is mocked using the email for demo
-                    purposes. In a live setting, a unique, system-generated
-                    customer ID would be used to save and load the sessions
-                    securely via an authenticated checkout.
-                  </small>
-                </div>
+            <div class="row g-2">
+              <div class="mb-3 col-12">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="saveOnSuccess"
+                />
+                <label class="form-check-label" for="saveOnSuccess"
+                  >Save on Success</label
+                >
               </div>
-
-              <!-- Continue a past demo Section -->
+            </div>
+            <div class="row">
               <div class="mb-3 col-6">
-                <div class="col-md-12">
-                  <label for="emailForDemo" class="form-label"
-                    >Or, continue using saved token:</label
-                  >
-                  <div class="input-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="emailForDemo"
-                      name="emailForDemo"
-                      placeholder="Enter Email"
-                      aria-label="Enter Email"
-                    />
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      id="continueButton"
-                    >
-                      Load
-                    </button>
-                  </div>
-                </div>
+                <label
+                  for="clientPaymentTokenUniqueReference"
+                  class="form-label"
+                  >Token Unique Reference</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="clientPaymentTokenUniqueReference"
+                  name="clientPaymentTokenUniqueReference"
+                  placeholder="Enter token reference"
+                />
+              </div>
+              <div class="mb-3 col-6">
+                <label for="customerId" class="form-label">CustomerId</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="customerId"
+                  name="customerId"
+                  placeholder="Enter customer ID"
+                />
               </div>
             </div>
           </div>
-          <br />
           <button
             type="submit"
             class="btn btn-primary mx-auto d-block"

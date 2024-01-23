@@ -5,10 +5,6 @@ function toggleLoadingDisplay(show) {
   formWrapper.toggle(!show);
 }
 
-function filterAlphanumeric(s) {
-  return s.replace(/[^a-zA-Z0-9_-]/g, '');
-}
-
 function toggleErrorDisplay(message) {
   const errorBox = $('#error-box');
   if (message) {
@@ -164,7 +160,6 @@ async function submitPayment(e) {
   let fieldsToValidate = [
     // List of field names that are always required
     'amount',
-    'cardType',
     'email',
     'billingFirstName',
     'billingLastName',
@@ -177,7 +172,7 @@ async function submitPayment(e) {
 
   // Add conditional fields if saveOnSuccess is checked
   if (isSaveOnSuccessChecked) {
-    fieldsToValidate.push('clientPaymentTokenUniqueReference');
+    fieldsToValidate.push('customerId', 'clientPaymentTokenUniqueReference');
   }
 
   const missingFields = fieldsToValidate.filter(
@@ -197,11 +192,9 @@ async function submitPayment(e) {
 
   try {
     var saveOnSuccess = $('#saveOnSuccess').is(':checked'); // Check if checkbox is checked
-    var customerId = isSaveOnSuccessChecked
-      ? filterAlphanumeric($('#email').val())
-      : null;
+    var customerId = isSaveOnSuccessChecked ? $('#customerId').val() : null;
     var clientPaymentTokenUniqueReference = isSaveOnSuccessChecked
-      ? filterAlphanumeric($('#clientPaymentTokenUniqueReference').val())
+      ? $('#clientPaymentTokenUniqueReference').val()
       : null;
     console.log('saveOnSuccess:' + saveOnSuccess);
     console.log('customerId:' + customerId);
@@ -378,22 +371,3 @@ async function submitPayment(e) {
 }
 
 $(window).resize(initializeSelect2);
-
-$(document).ready(function () {
-  $('#saveOnSuccess').change(function () {
-    // Using jQuery's toggleClass to add or remove the 'd-none' class based on the checkbox state
-    $('#paymentTokenContainer').toggleClass('d-none', !this.checked);
-    $('#paymentTokenNote').toggleClass('d-none', !this.checked);
-  });
-
-  $('#continueButton').click(function () {
-    var email = $('#emailForDemo').val();
-    if (email && filterAlphanumeric(email)) {
-      // Check if the email is not empty
-      window.location.href =
-        '/continue?custId=' + encodeURIComponent(filterAlphanumeric(email));
-    } else {
-      alert('Please enter a valid email address.'); // Alert if the email input is empty
-    }
-  });
-});

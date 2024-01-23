@@ -23,10 +23,6 @@ input.form-control::placeholder {
   border-radius: 5px;
 }
 
-#mov-status-wrapper {
-  display: none;
-}
-
 #mov-payment-form .row .col:first-of-type {
   text-align:right;
   width:25%;
@@ -38,7 +34,7 @@ input.form-control::placeholder {
 
 #loader {
   min-height: 200px;
-  min-width: 500px;
+  max-width: 500px;
   margin: auto;
   display: none;
 }
