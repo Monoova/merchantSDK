@@ -11,7 +11,7 @@
  *         errorMessage:
  *           type: string
  *           description: A descriptive error message
- * 
+ *
  *     MonoovaApiBaseResponse:
  *       type: object
  *       properties:
@@ -19,7 +19,7 @@
  *           type: array
  *           items:
  *             $ref: '#/components/schemas/MonoovaApiError'
- * 
+ *
  *     CreateClientSessionTokenResponse:
  *       type: object
  *       properties:
@@ -45,17 +45,17 @@
  *         - $ref: '#/components/schemas/MonoovaApiBaseResponse'
  */
 export interface CreateClientSessionTokenResponse extends MonoovaApiBaseResponse {
-    clientTransactionUniqueReference: string;
-    clientToken: string;
-    clientTokenExpirationDate: string;
-    traceId: string;
+  clientTransactionUniqueReference: string
+  clientToken: string
+  clientTokenExpirationDate: string
+  traceId: string
 }
 
 export interface MonoovaApiError {
-    errorCode: string;
-    errorMessage: string;
+  errorCode: string
+  errorMessage: string
 }
 
 export interface MonoovaApiBaseResponse {
-    errors: MonoovaApiError[];
+  errors: MonoovaApiError[]
 }

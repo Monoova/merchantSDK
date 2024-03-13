@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -82,9 +82,7 @@
             <h1 class="d-none d-md-block">Monoova Payments</h1>
           </div>
         </div>
-        <h4 class="d-none d-md-block">
-          Please fill the details below to submit your payment
-        </h4>
+        <h4 class="d-none d-md-block">Please fill the details below to submit your payment</h4>
       </div>
       <div id="mov-form-wrapper" class="shadow">
         <form id="mov-payment-form" class="container" onsubmit="return false">
@@ -105,12 +103,7 @@
             </div>
             <div class="mb-3 col-6">
               <label for="cardType" class="form-label mb-0">Card Type</label>
-              <select
-                name="cardType"
-                class="form-control"
-                id="cardType"
-                required
-              >
+              <select name="cardType" class="form-control" id="cardType" required>
                 <option value="">Select Your Card Type</option>
                 <option value="Visa">Visa</option>
                 <option value="Mastercard">Mastercard</option>
@@ -132,9 +125,7 @@
               <h5>Billing Address</h5>
             </div>
             <div class="mb-3 col-6">
-              <label for="billingFirstName" class="form-label"
-                >First Name</label
-              >
+              <label for="billingFirstName" class="form-label">First Name</label>
               <input
                 type="text"
                 class="form-control"
@@ -188,17 +179,10 @@
             </div>
             <div class="mb-3 col-6 dropdowns">
               <label for="billingState" class="form-label">State</label>
-              <select
-                class="form-control"
-                id="billingState"
-                name="billingState"
-                required
-              ></select>
+              <select class="form-control" id="billingState" name="billingState" required></select>
             </div>
             <div class="mb-3 col-6">
-              <label for="billingPostCode" class="form-label"
-                >Postal Code</label
-              >
+              <label for="billingPostCode" class="form-label">Postal Code</label>
               <input
                 type="text"
                 class="form-control"
@@ -213,21 +197,13 @@
             </div>
             <div class="row g-2">
               <div class="mb-3 col-12">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="saveOnSuccess"
-                />
-                <label class="form-check-label" for="saveOnSuccess"
-                  >Save on Success</label
-                >
+                <input type="checkbox" class="form-check-input" id="saveOnSuccess" />
+                <label class="form-check-label" for="saveOnSuccess">Save on Success</label>
               </div>
             </div>
             <div class="row">
               <div class="mb-3 col-6">
-                <label
-                  for="clientPaymentTokenUniqueReference"
-                  class="form-label"
+                <label for="clientPaymentTokenUniqueReference" class="form-label"
                   >Token Unique Reference</label
                 >
                 <input
@@ -272,20 +248,14 @@
       id="mov-footer"
       class="container-sm text-center d-flex justify-content-center align-items-center mb-0 mt-4"
     >
-      &copy; Monoova Payments Pty Limited (ACN 126 015 227 / Authorised
-      Representative No. 000428863)
+      &copy; Monoova Payments Pty Limited (ACN 126 015 227 / Authorised Representative No.
+      000428863)
     </div>
 
     <!-- Include your script to initialize the SDK and send data to Primer -->
     <!-- Begin Primer Scripts -->
-    <link
-      rel="stylesheet"
-      href="https://sdk.primer.io/web/v2.35.1/Checkout.css"
-    />
-    <script
-      src="https://sdk.primer.io/web/v2.35.1/Primer.min.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="https://sdk.primer.io/web/v2.35.1/Checkout.css" />
+    <script src="https://sdk.primer.io/web/v2.35.1/Primer.min.js" crossorigin="anonymous"></script>
     <!-- End Primer scripts-->
 
     <script

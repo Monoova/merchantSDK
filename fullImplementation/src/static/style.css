@@ -6,7 +6,7 @@ body {
 }
 
 #mov-footer {
-  color:#a1a1a1
+  color: #a1a1a1;
 }
 
 .form-label {
@@ -14,7 +14,7 @@ body {
 }
 
 input.form-control::placeholder {
-  color: #d0d0d0; 
+  color: #d0d0d0;
 }
 
 #mov-form-wrapper {
@@ -24,11 +24,11 @@ input.form-control::placeholder {
 }
 
 #mov-payment-form .row .col:first-of-type {
-  text-align:right;
-  width:25%;
+  text-align: right;
+  width: 25%;
 }
 
-.shadow{
+.shadow {
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -40,7 +40,7 @@ input.form-control::placeholder {
 }
 
 #checkout-container {
-  display:none;
+  display: none;
   overflow: hidden;
   margin: 0 auto;
   max-width: 500px;
@@ -71,13 +71,12 @@ input.form-control::placeholder {
   box-shadow: 4px 5px 5px 1px #fce2e2;
 }
 
-
 @media (max-width: 800px) {
   .headerWLogo {
     flex-direction: column;
     align-items: center;
   }
-  
+
   /* Stack logo and heading vertically */
   .headerWLogo .col-2,
   .headerWLogo .col-8 {
@@ -85,7 +84,7 @@ input.form-control::placeholder {
     text-align: center;
   }
 
-  #mov-footer{
+  #mov-footer {
     font-size: small;
   }
 
@@ -93,5 +92,4 @@ input.form-control::placeholder {
     flex: 0 0 100%;
     max-width: 100%;
   }
-
 }

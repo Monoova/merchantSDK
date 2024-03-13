@@ -1,21 +1,16 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Run Sandbox",
-            "runtimeExecutable": "npx",
-            "args": [
-                "ts-node",
-                "${workspaceFolder}\\src\\server.ts"
-            ],
-            "env": {
-                "NODE_ENV": "sandbox"
-            },
-            "skipFiles": [
-                "<node_internals>/**"
-            ]
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run Sandbox",
+      "runtimeExecutable": "npx",
+      "args": ["ts-node", "${workspaceFolder}\\src\\server.ts"],
+      "env": {
+        "NODE_ENV": "sandbox"
+      },
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
 }

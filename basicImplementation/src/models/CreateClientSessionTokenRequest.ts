@@ -81,35 +81,35 @@
  *           type: string
  */
 export interface CreateClientSessionTokenRequest {
-    customer: Customer;
-    paymentDetails: PaymentDetails;
-    amount: Amount;
-    clientTransactionUniqueReference: string;
+  customer: Customer
+  paymentDetails: PaymentDetails
+  amount: Amount
+  clientTransactionUniqueReference: string
 }
 
 export interface Customer {
-    customerId?: string;
-    emailAddress: string;
-    billingAddress: BillingAddress;
+  customerId?: string
+  emailAddress: string
+  billingAddress: BillingAddress
 }
 
 export interface BillingAddress {
-    firstName: string;
-    lastName: string;
-    postalCode: string;
-    street: string[];
-    countryCode: string;
-    suburb: string;
-    state: string;
+  firstName: string
+  lastName: string
+  postalCode: string
+  street: string[]
+  countryCode: string
+  suburb: string
+  state: string
 }
 
 export interface Amount {
-    currencyAmount: string;
+  currencyAmount: string
 }
 
 export interface PaymentDetails {
-    cardType: string;
-    description: string;
-    saveOnSuccess: boolean;
-    clientPaymentTokenUniqueReference?: string;
+  cardType: string
+  description: string
+  saveOnSuccess: boolean
+  clientPaymentTokenUniqueReference?: string
 }

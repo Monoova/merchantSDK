@@ -1,3 +1,3 @@
 export interface MonoovaLoginResponse {
-    token: string;
+  token: string
 }
