@@ -72,7 +72,7 @@ public class MonoovaApiService : IMonoovaApiService
                 .AllowHttpStatus("400")
                 .WithOAuthBearerToken(authToken)
                 .WithHeader("mAccount", _monoovaSettings.Value.Username)
-                .PostJsonAsync(request, cancellationToken);
+                .PostJsonAsync(request, new(), cancellationToken);
 
             var httpResponse = response.ResponseMessage;
 
