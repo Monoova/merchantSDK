@@ -1,0 +1,40 @@
+name: Generate File Checksums
+
+on:
+  push:
+    branches:
+      - main # Runs on pushes to the main branch (customize as needed)
+    tags:
+      - '*'  # Also runs on tag pushes (optional)
+
+jobs:
+  generate-checksums:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Step 2: Generate checksums for all files in the repository
+    - name: Generate Checksums for All Files
+      run: |
+        find . -type f ! -path "./.git/*" -exec sha256sum {} \; > FILE_CHECKSUMS.txt
+
+    # Step 3: Upload the checksum file as an artifact (optional)
+    - name: Upload FILE_CHECKSUMS.txt as an Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: file-checksums
+        path: FILE_CHECKSUMS.txt
+
+    # Step 4: Commit and push FILE_CHECKSUMS.txt (optional)
+    - name: Commit and Push Checksums
+      run: |
+        git config --global user.name "GitHub Actions Bot"
+        git config --global user.email "actions@github.com"
+        git add FILE_CHECKSUMS.txt
+        git commit -m "Add FILE_CHECKSUMS.txt with generated checksums"
+        git push origin HEAD
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
