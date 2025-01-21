@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main # Runs on pushes to the main branch (customize as needed)
+      - Monoova
     tags:
       - '*'  # Also runs on tag pushes (optional)
 
@@ -19,7 +20,7 @@ jobs:
     # Step 2: Generate checksums for all files in the repository
     - name: Generate Checksums for All Files
       run: |
-        find . -type f ! -path "./.git/*" -exec sha256sum {} \; > FILE_CHECKSUMS.txt
+        find basicImplementation basicImplementationDotNet fullImplementation -type f -exec sha256sum {} \; > FILE_CHECKSUMS.txt
 
     # Step 3: Upload the checksum file as an artifact (optional)
     - name: Upload FILE_CHECKSUMS.txt as an Artifact
@@ -33,8 +34,14 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "bambang.lestari@monoova.com"
-        git add FILE_CHECKSUMS.txt
-        git commit -m "Add FILE_CHECKSUMS.txt with generated checksums"
-        git push origin HEAD
+        
+        # Check for changes before committing
+        if [[ -n "$(git status --porcelain)" ]]; then
+          git add FILE_CHECKSUMS.txt
+          git commit -m "Add FILE_CHECKSUMS.txt with generated checksums"
+          git push origin HEAD
+        else
+          echo "No changes to commit."
+        fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
