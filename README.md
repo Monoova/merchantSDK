@@ -4,6 +4,8 @@ This sample application was developed using Node.js and the [Express.js](https:/
 
 We also include a .NET solution and a basic implementation for your convenience. These can be run independently of each other and are included for demonstration and simplified prototyping.
 
+This repository also includes a GitHub Action that triggers on every code check-in to automatically compute a SHA256 checksum for any modified files. The computed checksums are stored in a file named FILE_CHECKSUMS.txt, ensuring file integrity and providing a reliable reference for verifying that files remain unaltered.
+
 # Prerequisites
 
 Before running this sample application, you must obtain an `mAccount` to gain access to the API Gateway.
