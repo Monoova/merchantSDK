@@ -31,8 +31,22 @@ jobs:
         name: file-checksums
         path: FILE_CHECKSUMS.txt
 
-    # Step 4: Commit and push FILE_CHECKSUMS.txt (optional)
-    - name: Commit and Push Checksums
+    # Step 4: Commit changes and create a pull request
+    - name: Commit Changes and Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: changes/file-checksums
+        commit-message: "Add FILE_CHECKSUMS.txt with generated checksums"
+        title: "Update FILE_CHECKSUMS.txt"
+        body: |
+          This pull request updates the FILE_CHECKSUMS.txt file with the latest generated checksums.
+        labels: |
+          automated-update
+
+    # Step 5: Push directly (optional, if pull request merging is not required)
+    - name: Commit and Push Checksums (if PR merging isn't enforced)
+      if: ${{ github.event_name != 'pull_request' }} # Ensures it's only run when not triggered by a PR
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "bambang.lestari@monoova.com"
