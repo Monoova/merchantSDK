@@ -56,7 +56,7 @@ input.form-control::placeholder {
 }
 
 #error-box.active {
-  width: 500px;
+  max-width: 100%;
   visibility: visible;
   height: auto;
   margin: 30px auto;
@@ -75,6 +75,10 @@ input.form-control::placeholder {
   .headerWLogo {
     flex-direction: column;
     align-items: center;
+  }
+
+  #checkout-container {
+    padding: 16px;
   }
 
   /* Stack logo and heading vertically */

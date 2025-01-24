@@ -59,7 +59,6 @@
  *           type: string
  *     PaymentDetails:
  *       type: object
- *       required:
  *         - description
  *       properties:
  *         cardType:
@@ -70,6 +69,9 @@
  *           type: boolean
  *         clientPaymentTokenUniqueReference:
  *           type: string
+ *         applySurcharge:
+ *           type: boolean
+ *           default: false
  *     Amount:
  *       type: object
  *       required:
@@ -78,6 +80,7 @@
  *         currencyAmount:
  *           type: string
  */
+
 export interface CreateClientSessionTokenRequest {
   customer: Customer
   paymentDetails: PaymentDetails
@@ -111,4 +114,5 @@ export interface PaymentDetails {
   saveOnSuccess?: boolean
   capturePayment?: boolean
   clientPaymentTokenUniqueReference?: string
+  applySurcharge?: boolean
 }

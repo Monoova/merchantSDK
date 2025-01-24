@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
              // Specify the selector of the html element where the universal checkout will be displayed
              // in checkout.html it is currently <div id="checkout-container"></div>
              container: '#checkout-container',
+             clientSessionCachingEnabled: true,
              style: {
                 submitButton: {
                    base: {

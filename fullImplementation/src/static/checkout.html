@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -23,34 +23,35 @@
     <!-- begin debug code-->
     <!-- <script>
       function populateFormForDebugging() {
-         const fieldValues = {
-            amount: '$1.00',
-            email: 'test@gmail.com',
-            billingFirstName: 'billingFirstName',
-            billingLastName: 'billingLastName',
-            billingStreet: '123 Main street',
-            billingSuburb: 'Sydney',
-            billingState: 'NSW',
-            billingCountry: 'AU',
-            billingPostCode: '2000',
-            cardType: 'Visa'
-         };
+        const fieldValues = {
+          amount: '$1.00',
+          email: 'test@gmail.com',
+          billingFirstName: 'billingFirstName',
+          billingLastName: 'billingLastName',
+          billingStreet: '123 Main street',
+          billingSuburb: 'Sydney',
+          billingState: 'NSW',
+          billingCountry: 'AU',
+          billingPostCode: '2000',
+          cardType: 'Visa'
+        }
 
-         // Loop through the object and set the values
-         Object.keys(fieldValues).forEach(fieldName => {
-            const input = document.querySelector(`#mov-payment-form [name="${fieldName}"]`);
-            if (input) {
-               if (input.type === 'text' || input.type === 'email' || input.tagName === 'SELECT') {
-                  input.value = fieldValues[fieldName];
-               }
+        // Loop through the object and set the values
+        Object.keys(fieldValues).forEach((fieldName) => {
+          const input = document.querySelector(`#mov-payment-form [name="${fieldName}"]`)
+          if (input) {
+            if (input.type === 'text' || input.type === 'email' || input.tagName === 'SELECT') {
+              input.value = fieldValues[fieldName]
+            } else if (input.type === 'checkbox') {
+              input.checked = fieldValues[fieldName]
             }
-         });
+          }
+        })
       }
 
       // Ensure the DOM is fully loaded before running the function
-      document.addEventListener('DOMContentLoaded', populateFormForDebugging);
-
-   </script> -->
+      document.addEventListener('DOMContentLoaded', populateFormForDebugging)
+    </script> -->
     <!-- end debug code-->
   </head>
   <body>
@@ -87,7 +88,7 @@
       <div id="mov-form-wrapper" class="shadow">
         <form id="mov-payment-form" class="container" onsubmit="return false">
           <div class="row g-2">
-            <div class="mb-3 col-6">
+            <div class="mb-3 col-md-6 col-sm-12">
               <label for="amount" class="form-label mb-0">Amount</label>
               <input
                 type="text"
@@ -100,7 +101,7 @@
                 placeholder="$1,000.00"
               />
             </div>
-            <div class="mb-3 col-6">
+            <div class="mb-3 col-md-6 col-sm-12">
               <label for="cardType" class="form-label mb-0">Card Type</label>
               <select name="cardType" class="form-control" id="cardType" required>
                 <option value="">Select Your Card Type</option>
@@ -109,21 +110,32 @@
                 <!-- <option value="Amex">American Express</option>  //Will Be supported in Future implementation -->
               </select>
             </div>
-            <div class="mb-3 col-6">
-              <label for="email" class="form-label">Email Address</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                name="email"
-                placeholder="name@example.com"
-                required
-              />
+            <div class="row g-2">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="applySurcharge" />
+                  <label class="form-check-label" for="applySurcharge">Apply Surcharge?</label>
+                </div>
+                <div id="surchargeInfo" style="font-style: italic; display: none">
+                  Configured surcharge should reflect the transaction cost.
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <label for="email" class="form-label">Email Address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="name@example.com"
+                  required
+                />
+              </div>
             </div>
             <div class="mt-4 col-12">
               <h5>Billing Address</h5>
             </div>
-            <div class="mb-3 col-6">
+            <div class="mb-3 col-md-6 col-sm-12">
               <label for="billingFirstName" class="form-label">First Name</label>
               <input
                 type="text"
@@ -134,7 +146,7 @@
                 required
               />
             </div>
-            <div class="mb-3 col-6">
+            <div class="mb-3 col-md-6 col-sm-12">
               <label for="billingLastName" class="form-label">Last Name</label>
               <input
                 type="text"
@@ -145,7 +157,7 @@
                 required
               />
             </div>
-            <div class="mb-3 col-6">
+            <div class="mb-3 col-md-6 col-sm-12">
               <label for="billingStreet" class="form-label">Street</label>
               <input
                 type="text"
@@ -156,7 +168,7 @@
                 required
               />
             </div>
-            <div class="mb-3 col-6">
+            <div class="mb-3 col-md-6 col-sm-12">
               <label for="billingSuburb" class="form-label">Suburb</label>
               <input
                 type="text"
@@ -167,7 +179,7 @@
                 required
               />
             </div>
-            <div class="mb-3 col-6 dropdowns">
+            <div class="mb-3 col-md-6 col-sm-12 dropdowns">
               <label for="billingCountry" class="form-label">Country</label>
               <select
                 class="form-control"
@@ -176,11 +188,11 @@
                 required
               ></select>
             </div>
-            <div class="mb-3 col-6 dropdowns">
+            <div class="mb-3 col-md-6 col-sm-12 dropdowns">
               <label for="billingState" class="form-label">State</label>
               <select class="form-control" id="billingState" name="billingState" required></select>
             </div>
-            <div class="mb-3 col-6">
+            <div class="mb-3 col-md-6 col-sm-12">
               <label for="billingPostCode" class="form-label">Postal Code</label>
               <input
                 type="text"
@@ -201,7 +213,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="mb-3 col-6">
+              <div class="mb-3 col-md-6 col-sm-12">
                 <label for="clientPaymentTokenUniqueReference" class="form-label"
                   >Token Unique Reference</label
                 >
@@ -213,7 +225,7 @@
                   placeholder="Enter token reference"
                 />
               </div>
-              <div class="mb-3 col-6">
+              <div class="mb-3 col-md-6 col-sm-12">
                 <label for="customerId" class="form-label">CustomerId</label>
                 <input
                   type="text"
@@ -259,8 +271,8 @@
 
     <!-- Include your script to initialize the SDK and send data to Primer -->
     <!-- Begin Primer Scripts -->
-    <link rel="stylesheet" href="https://sdk.primer.io/web/v2.42.1/Checkout.css" />
-    <script src="https://sdk.primer.io/web/v2.42.1/Primer.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://sdk.primer.io/web/v2.45.8/Checkout.css" />
+    <script src="https://sdk.primer.io/web/v2.45.8/Primer.min.js" crossorigin="anonymous"></script>
     <!-- End Primer scripts-->
 
     <script

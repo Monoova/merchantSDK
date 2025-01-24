@@ -73,28 +73,46 @@ The customer details are shown below and will be serialised and sent as a body t
 ```json
 {
   "customer": {
+    "customerId": "",
     "emailAddress": "",
-    "mobileNumber": " ",
     "billingAddress": {
-      "firstName": " ",
-      "lastName": " ",
-      "postalCode": " ",
+      "firstName": "",
+      "lastName": "",
+      "postalCode": "",
       "street": [""],
-      "countryCode": " ",
-      "suburb": " ",
-      "state": " "
+      "countryCode": "",
+      "suburb": "",
+      "state": ""
     }
   },
   "paymentDetails": {
-    "cardType": " ",
+    "cardType": "",
     "description": "sample token create",
-    "saveOnSuccess": false
+    "saveOnSuccess": false,
+    "capturePayment": false,
+    "clientPaymentTokenUniqueReference": "",
+    "applySurcharge": false
   },
   "amount": {
     "currencyAmount": ""
-  }
+  },
+  "clientTransactionUniqueReference": ""
 }
 ```
+
+## Updating the SDK Version
+
+New versions are released periodically with additional features and performance improvements. To update the SDK to the latest version, replace the version number in the stylesheet link and Primer script.
+
+```html
+<link rel="stylesheet" href="https://sdk.primer.io/web/v2.45.8/Checkout.css" />
+<script
+  src="https://sdk.primer.io/web/v2.45.8/Primer.min.js"
+  crossorigin="anonymous"
+></script>
+```
+
+The current version of the SDK is 2.45.8.
 
 ## Client.js
 
@@ -102,7 +120,7 @@ This script initiates a server request to the `/token` endpoint. It utilises the
 
 The client session and any UI customisation options are passed along during this step.
 
-## Options Callback Handling
+## Callback Handling
 
 The `options` object facilitates the integration of several callback functions to manage different stages of the checkout process, enhancing user experience and providing detailed feedback on transaction outcomes. Primarily, it includes onCheckoutComplete and onCheckoutFail callbacks but can be extended with additional callbacks for a more nuanced handling of the checkout lifecycle.
 
@@ -134,6 +152,16 @@ For a comprehensive handling of other possible checkout scenarios, consider impl
 - onCheckoutStart: Called when the checkout process officially starts, allowing for UI adjustments or analytics tracking.
 - onCheckoutCancel: Triggered if the user cancels the checkout process, enabling cleanup actions or UI updates to reflect the cancellation.
 - onPaymentMethodShow and onPaymentMethodHide: These callbacks are useful for managing UI elements based on the visibility of payment methods, aiding in creating a dynamic and responsive checkout experience.
+
+## Tokenising Card Details
+
+Customer card details can be saved as a token and used for subsequent purchases by setting `saveOnSuccess` to true in the client session payload. If the card details are validated as correct, this will result in a token being generated and saved against the customers `customerId`.
+
+To save card details without taking an upfront payment, pass `saveOnSuccess` as `true`, `capturePayment` as `false`, and the `amount` as $0.01.
+
+## Surcharging
+
+To add a surcharge to the card payment, pass `ApplySurcharge` as true. Monoova will identify the card type used in the transaction and apply the preconfigured surcharge amount. This surcharge amount is configured in the Monoova backend and can be changed by contacting Monoova support.
 
 ## Options Style customisation
 

@@ -37,6 +37,9 @@ export const createToken = async (req: Request, res: Response) => {
       createClientSessionTokenRequest.clientTransactionUniqueReference = uuidv4()
     }
 
+    // Apply Surcharge flag can be applied via the server-side calls
+    // Customer Id can be applied via the server-side calls
+
     const loginResponse: MonoovaLoginResponse = await monoovaService.loginToMonoova()
 
     const createTokenResponse = await monoovaService.createClientSessionToken(
