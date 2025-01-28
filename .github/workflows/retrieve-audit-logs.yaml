@@ -1,0 +1,32 @@
+name: Retrieve Audit Logs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+
+jobs:
+  fetch-and-upload-audit-logs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository (optional)
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Fetch the audit logs using GitHub API
+      - name: Fetch Audit Logs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # Or use a PAT stored in secrets
+        run: |
+          curl -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/Monoova/merchantSDK/audit-log \
+            -o audit-log.json
+
+      # Step 3: Upload the logs as an artifact
+      - name: Upload Audit Logs Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: audit-logs
+          path: audit-log.json
