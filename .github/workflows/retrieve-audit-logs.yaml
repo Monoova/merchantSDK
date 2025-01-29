@@ -1,4 +1,4 @@
-name: Retrieve Audit Logs
+name: Retrieve Audit Logs and Events
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     - cron: '0 0 * * *' # Runs daily at midnight
 
 jobs:
-  fetch-and-upload-audit-logs:
+  fetch-and-upload-logs:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,19 +14,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Fetch the audit logs using GitHub API
-      - name: Fetch Audit Logs
+      # Step 2: Fetch the organization audit logs
+      - name: Fetch Organization Audit Logs
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # Or use a PAT stored in secrets
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # Ensure the token has read:org permissions
         run: |
           curl -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/Monoova/merchantSDK/audit-log \
-            -o audit-log.json
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/orgs/Monoova/audit-log \
+               -o audit-log.json
 
-      # Step 3: Upload the logs as an artifact
-      - name: Upload Audit Logs Artifact
+      # Step 3: Fetch repository events
+      - name: Fetch Repository Events
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          curl -H "Authorization: Bearer $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/repos/Monoova/merchantSDK/events \
+               -o events.json
+
+      # Step 4: Upload both logs as artifacts
+      - name: Upload Audit Logs and Events
         uses: actions/upload-artifact@v3
         with:
-          name: audit-logs
-          path: audit-log.json
+          name: audit-logs-and-events
+          path: |
+            audit-log.json
+            events.json
