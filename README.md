@@ -20,14 +20,13 @@ The .NET solution uses .NET 7.0, and the solution (.sln) file can be opened with
 
 1. Clone the Repo.
 
-- The repo has three implementations
-  - fullImplementation: This shows an entire example, including an HTML form that takes in the minimum values required to create a session
-  - basicImplementation: This example is a cut-down version of fullImplementation. It's more suitable for integrating into an existing implementation where the required customer details are already being retrieved. It does not include the HTML form to take inputs to create a client session. Instead, it is hardcoded in the expressjs application.
-  - basicImplementationDotNet: Intended to show the same information as basicImplementation. Here, the build process matches the general workflow for .NET applications in Visual Studio, including normal steps building and debugging a .Net 7 app (which run when you select and run a debugger).
-- choose your implementation by opening either the fullImplementation or basicImplementation folder in your editor of choice; Visual Studio code is an example. To open basicImplementationDotNet we recommend using Visual Studio 2022 or above.
+- The repo has two implementations
+  - ExpressJS folder: Does not include the HTML form to take inputs to create a client session. Instead, it is hardcoded in the expressjs application.
+  - DotNet folder: Intended to show the same information as the ExpressJS code. Here, the build process matches the general workflow for .NET applications in Visual Studio, including normal steps building and debugging a .Net 7 app (which run when you select and run a debugger).
+- choose your implementation in your editor of choice; Visual Studio code is an example. To open DotNet we recommend using Visual Studio 2022 or above.
 
 2. Navigate to your `config/sandbox.json` and make any necessary edits to the configuration settings.
-   (Note: basicImplementationDotNet requires customising `appsettings.json` or `appsettings.Development.json`)
+   (Note: DotNet requires customising `appsettings.json` or `appsettings.Development.json`)
 
 ```json
 {
