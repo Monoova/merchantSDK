@@ -104,14 +104,13 @@ The customer details are shown below and will be serialised and sent as a body t
 New versions are released periodically with additional features and performance improvements. To update the SDK to the latest version, replace the version number in the stylesheet link and Primer script.
 
 ```html
-<link rel="stylesheet" href="https://sdk.primer.io/web/v2.45.8/Checkout.css" />
-<script
-  src="https://sdk.primer.io/web/v2.45.8/Primer.min.js"
-  crossorigin="anonymous"
-></script>
+<!-- Begin Primer Scripts -->
+<link rel="stylesheet" href="https://sdk.primer.io/web/v2.62.1/Checkout.css" />
+<script src="https://sdk.primer.io/web/v2.62.1/Primer.min.js" crossorigin="anonymous"></script>
+<!-- End Primer scripts-->
 ```
 
-The current version of the SDK is 2.45.8.
+The latest version of SDK is 2.62.1. This will be available for use from 25 Aug 2026 in sandbox and 08 September 2026 in production.
 
 ## Client.js
 
