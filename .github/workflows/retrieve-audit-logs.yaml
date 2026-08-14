@@ -1,0 +1,63 @@
+name: Retrieve Audit Logs and Events
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+
+jobs:
+  fetch-and-upload-logs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Set environment variables
+      - name: Set Variables
+        run: echo "TIMESTAMP=$(date +'%Y%m%d_%H%M')" >> $GITHUB_ENV
+
+      # Step 2: Checkout the repository (optional)
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 3: Fetch the organization audit logs
+      - name: Fetch Organization Audit Logs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          curl -H "Authorization: Bearer $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/orgs/Monoova/audit-log \
+               -o audit-log-${{ env.TIMESTAMP }}.json
+
+      # Step 4: Fetch repository events
+      - name: Fetch Repository Events
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          curl -H "Authorization: Bearer $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/repos/Monoova/merchantSDK/events \
+               -o events-${{ env.TIMESTAMP }}.json
+
+      # Step 5: Install Azure CLI
+      - name: Install Azure CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y azure-cli
+
+      # Step 6: Upload logs to Azure Blob Storage
+      - name: Upload Audit Logs and Events to Azure Storage
+        env:
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          CONTAINER_NAME: merchantsdk # Define your storage container name
+        run: |
+          az storage blob upload --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+                                 --container-name "$CONTAINER_NAME" \
+                                 --file audit-log-${{ env.TIMESTAMP }}.json \
+                                 --name audit-log-${{ env.TIMESTAMP }}.json \
+                                 --overwrite
+          
+          az storage blob upload --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+                                 --container-name "$CONTAINER_NAME" \
+                                 --file events-${{ env.TIMESTAMP }}.json \
+                                 --name events-${{ env.TIMESTAMP }}.json \
+                                 --overwrite

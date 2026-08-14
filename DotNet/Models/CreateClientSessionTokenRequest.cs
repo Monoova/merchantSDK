@@ -20,6 +20,7 @@ public class PaymentDetails
     public string CardType { get; set; }
     public string Description { get; set; }
     public bool SaveOnSuccess { get; set; }
+    public bool ApplySurcharge { get; set; }
     public string ClientPaymentTokenUniqueReference { get; set; }
 }
 
